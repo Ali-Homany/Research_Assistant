@@ -1,11 +1,13 @@
 # Speech Feature
-This branch aims to provide an easy way to recognize text from a given audio
+This branch aims to provide an easy way to recognize text from a given audio, and integrate it with the chatbot in a gradio interface.
 
-It includes 3 modules:
+It includes 4 modules:
 - **transcriber:**
 This is the main module that provides the Transcriber class, which can be created, and called with the audio file path to return it as text
 
-- **app:** This is a simple gradio interface to use the transcriber
+- **chatbot:** This module mainly offers a way to chat and interact with a medical assistant using OpenAI's gpt4o-mini
+
+- **app:** This is a simple gradio interface for chatting with the chatbot.
 
 - **main:** This is just for testing and using the Transcriber directly
 
@@ -25,4 +27,4 @@ pip install -r requirements.txt
 
 - Add `C:\ffmpeg\ffmpeg-7.0.2-essentials_build\bin` to Path variable in your System Enviroment Variables
 
-4. Run app.py, insert the audio file you want
+4. Run app.py, you can chat with the bot through text or voice messages
