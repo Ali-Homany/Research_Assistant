@@ -1,16 +1,2 @@
+openai-whisper
 gradio
-pyperclip
-chromadb
-langchain
-langchain_community
-langchain_core
-sentence-transformers
-weasyprint
-bs4
-googlesearch
-aiohttp
-gtts
-SpeechRecognition
-PyAudio
-scipy
-soundfile
