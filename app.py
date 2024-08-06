@@ -15,7 +15,9 @@ def transcribe_audio(audio_path: str) -> str:
 def answer_message(message: str, chat_history: list[str], transformed_chat_history: list):
     system_message, history, end_chat_flag = asyncio.run(get_openai_response(client=client, conversation_history=transformed_chat_history, user_message=message, ai_model=ai_model))
     chat_history.append((message, system_message))
-    return chat_history, history
+    if end_chat_flag == 'Yes':
+        return chat_history, history, gr.update(interactive=False), gr.update(interactive=False)
+    return chat_history, history, gr.update(), gr.update()
 
 
 def answer_voice(voice_filepath: str, chat_history: list[str], transformed_chat_history: list):
@@ -23,6 +25,7 @@ def answer_voice(voice_filepath: str, chat_history: list[str], transformed_chat_
         return chat_history, transformed_chat_history
     message = transcribe_audio(voice_filepath)
     return answer_message(message, chat_history, transformed_chat_history)
+
 
 if __name__ == "__main__":    
     transcriber = Transcriber()
@@ -42,12 +45,12 @@ if __name__ == "__main__":
         voice_input.change(
             answer_voice,
             inputs=[voice_input, chat_history, transformed_chat_history],
-            outputs=[chat_history, transformed_chat_history]
+            outputs=[chat_history, transformed_chat_history, text_input, voice_input]
         )
         text_input.submit(
             answer_message,
             inputs=[text_input, chat_history, transformed_chat_history],
-            outputs=[chat_history, transformed_chat_history]
+            outputs=[chat_history, transformed_chat_history, text_input, voice_input]
         )
 
     demo.launch()
